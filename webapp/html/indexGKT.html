@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="dist/js/zui.js"></script>
+<script src="js/getGKTdb.js"></script>
+<script src="js/jquery.page.js"></script>
+<title>jenkinsDB</title>
+<link href="dist/css/zui.min.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
+<link rel="shortcut icon" href="image/ymfavicon.ico">
+</head>
+<body>
+    <div class="panel">
+        <div class="panel-body" style="padding-bottom: 5px;">
+            <div spellcheck="false">
+                <nav class="navbar navbar-inverse">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">JenkinsDB</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse ">
+                        <div class="">
+                            <label class="col1" style="color: white;">创建者</label>
+                            <div class="col2">
+                                <input id="creator"
+                                    class="form-control col-md-4"
+                                    type="text" value="" name="creator">
+                            </div>
+                            <label class="col1" style="color: white;">环境</label>
+                            <div class="col2">
+                                <select id="env"
+                                    class="form-control col-md-4"
+                                    name="env">
+                                </select>
+                            </div>
+                            <div class="col2">
+                                <button id="search"
+                                    class="btn btn-default"
+                                    data-loading="稍后..."
+                                    onclick="search()">搜索</button>
+                            </div>
+                        </div>
+                        <div class="refresh navbar-right">
+                            <label class="" style="color: white;">自动刷新</label>
+                            <button class="btn" id="autorefresh"
+                                onclick="autorefresh()" >
+                                <i class="icon icon-check-empty"></i>
+                            </button>
+                            <label class="" style="color: white;">手动刷新</label>
+                            <button class="btn   " id="refresh"
+                                onclick="refresh()">
+                                <i class="icon icon-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="tcdPageCode"
+                style="padding-top: 0px; padding-bottom: 0px;"></div>
+            <div id="sumCount"></div>
+            <div>
+                <table
+                    class="table table-hover table-bordered  table-condensed ">
+                    <thead>
+                        <tr>
+                            <th width=5px></th>
+                            <th width=5px>ST</th>
+                            <th>ID</th>
+                            <th>Creator</th>
+                            <th>Environment</th>
+                            <th>BUILD_NUM</th>
+                            <th>Base_buildNum</th>
+                            <th>Components</th>
+                            <th>Snapshots</th>
+                            <th>OfflineImages</th>
+                            <th>OnlineImages</th>
+                            <th>Creation_time</th>
+                            <th>TimeInterval</th>
+                        </tr>
+                    </thead>
+                    <tbody id="basic" />
+                </table>
+            </div>
+
+
+            <div contenteditable="false" class="heat_panel">
+                <div class=" panel  panel-info" style="margin: 0 auto;">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading ">
+                        <strong><a class="" href="#collapseOne"
+                            data-parent="#accordion"
+                            data-toggle="collapse">PROCESS INFO</a> </strong> 
+                    </div>
+                    <div class="panel-body panel-collapse fade in"
+                        id="collapseOne"
+                        style="padding: 0px; height: auto;">
+                        <table
+                            class="table table-hover table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class='tarColor'>tarStatus</th>
+                                    <th class='tarColor'>tarStartTime</th>
+                                    <th class='tarColor'>tarInterval</th>
+                                    <th class='imageColor'>imageStatus</th>
+                                    <th class='imageColor'>imageStartTime</th>
+                                    <th class='imageColor'>imageInterval</th>
+                                    <th class='deployColor'>deployStatus</th>
+                                    <th class='deployColor'>deployStartTime</th>
+                                    <th class='deployColor'>deployInterval</th>
+                                </tr>
+                            </thead>
+                            <tbody id="process_info">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel  panel-info" style="margin: 0 auto;">
+                    <div class="panel-heading ">
+                        <strong><a class="collapsed"
+                            href="#collapseTwo" data-parent="#accordion"
+                            data-toggle="collapse"
+                            id="deploy_status_panel">DEPLOY STATUS
+                                INFO</a></strong>
+                    </div>
+                    <div class="panel-body panel-collapse fade in"
+                        id="collapseTwo"
+                        style="padding: 0px; height: auto;">
+                        <table
+                            class="table table-hover table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>component_name</th>
+                                    <th>component_status</th>
+                                    <th>pods_status</th>
+                                    <th>pods_is_running</th>
+                                    <th>pods_is_ready</th>
+                                    <th>pods_pod_IP</th>
+                                    <th>pods_host_IP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deploy_status">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel  panel-info" style="margin: 0 auto;">
+                    <div class="panel-heading ">
+                        <strong><a href="#collapseFour"
+                            data-parent="#accordion"
+                            data-toggle="collapse" id="log_info_panel" class="collapsed" onclick=logLoad()>LOG
+                                INFO</a></strong>
+                        <strong id="log_head"></strong>
+                    </div>
+                    <div class="panel-body panel-collapse collapse fade"
+                        id="collapseFour" style="padding: 0px;">
+                        <table
+                            class="table table-hover table-bordered table-striped table-condensed"
+                            style="">
+                            <thead>
+                                <tr>
+                                    <th>log info</th>
+                                </tr>
+                            </thead>
+                            <tbody id="log_info">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="tcdPageCode"></div> -->
+        </div>
+    </div>
+
+</body>
+</html>

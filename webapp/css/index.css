@@ -1,0 +1,141 @@
+@CHARSET "UTF-8";
+
+.table {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.col1 {
+    float: left;
+    min-height: 1px;
+    padding: 8px 5px 8px 10px;
+    position: relative;
+}
+
+.col2 {
+    float: left;
+    min-height: 1px;
+    padding: 6px 10px 6px 5px;
+    position: relative;
+}
+
+.icon {
+    border-color: #ddf4df;
+    color: gray;
+}
+
+.icongreen {
+    border-color: #ddf4df;
+    font-size: 18px;
+    color: green;
+}
+
+.iconred {
+    border-color: #ddf4df;
+    font-size: 18px;
+    color: red;
+}
+.icongrey {
+    border-color: #ddf4df;
+    font-size: 18px;
+    color: grey;
+}
+
+.refresh {
+    padding: 6px 8px 6px 5px;
+}
+
+.tcdPageCode {
+    padding: 15px 20px;
+    text-align: left;
+    color: #ccc;
+    text-align: center;
+}
+
+.tcdPageCode a {
+    display: inline-block;
+    color: #428bca;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    margin: 0 2px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode a:hover {
+    text-decoration: none;
+    border: 1px solid #428bca;
+}
+
+.tcdPageCode span.current {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #114dad;
+    border: 1px solid #114dad;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode span.disabled {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #bfbfbf;
+    background: #f2f2f2;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tooltip-inner {
+    max-width: none;
+}
+.selected {
+    background: #ffe7bc;
+    color: blue;
+}
+
+#collapseFour {
+    height: 400px !important;
+    overflow: scroll;
+}
+
+td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+#refresh {
+    padding: 0px 3px;
+}
+
+#autorefresh {
+    padding: 0px 3px;
+}
+
+#jenkinsLogHyperlink {
+    color: #191970;
+}
+.tarColor {
+    background-color:#F6EFFA !important;
+}
+.imageColor {
+    background-color:#F2F4E2 !important;
+}
+.deployColor {
+    background-color:#FAEFEF !important;
+}
+.flagBackground {
+    background-color:#DA5151;
+    color: #f1f1f1;
+}

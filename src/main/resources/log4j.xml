@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] %d [%c.%M] - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="logs/jenkins.log" />
+        <param name="Threshold" value="INFO" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] %d{HH:mm} [%c.%M] - %m%n" />
+        </layout>
+    </appender>
+
+
+    <logger name="org.apache" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="file" />
+    </logger>
+    
+    <logger name="org.springframework">
+        <level value="error" />
+    </logger>
+    
+    <logger name="java.sql">
+        <level value="INFO" />
+    </logger>
+
+    <logger name="com.ndpmedia.model">
+        <level value="info" />
+    </logger>
+    
+    <logger name="com.ndpmedia.comm">
+        <level value="info" />
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+</log4j:configuration> 
