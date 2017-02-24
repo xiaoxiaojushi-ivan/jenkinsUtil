@@ -6,3 +6,4 @@ after_script:
   - cp /home/travis/.m2/repository/com/ndpmedia/jenkinsUtil/0.0.1/jenkinsUtil-0.0.1.war /home/travis/jenkinsUtil.war
   - ls /home/travis
  
+ 
